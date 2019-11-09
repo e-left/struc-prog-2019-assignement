@@ -1,12 +1,12 @@
 //Board struct
-struct Board {
+typedef struct {
     int rows;
     int columns;
     int** board;
-};
+} Board;
 
 //Initializes the board(size and zeroes it out)
-void InitBoard(Board* b);
+int InitBoard(Board* b, int r, int c);
 
 //Returns 0 if the move is valid or 1 if the move is invalid(negative col/full col/bigger col than columns)
 int CheckMove(const Board* b, int col);
@@ -22,3 +22,6 @@ int CountScore(const Board* b, int id);
 
 //Prints the current state of the board nicely formated.
 void PrintBoard(const Board* b);
+
+//Free the memory needed for the board
+void DestroyBoard(Board* b);
