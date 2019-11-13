@@ -70,6 +70,26 @@ int CheckFull(const Board* b){
 
 //Counts the score for each player id.
 int CountScore(const Board* b, int id){
+    int score = 0;
+    int tempscore = 0;
+    int count = 0;
+    
+    //checking for sequential no's in a row
+    for(int i = 0; i< b->rows; i++){
+        for(int j = 0; j< b->columns; j++){
+            if(b->board[i][j] == id){
+                tempscore++;
+            }
+        }
+        
+        if(tempscore > 2){
+            score += tempscore;
+        }
+
+        tempscore = 0;
+    }
+
+    //TODO implement other countings
 
 }
 
