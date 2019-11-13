@@ -91,6 +91,8 @@ int CountScore(const Board* b, int id){
 
     //TODO implement other countings
 
+
+    return score;
 }
 
 //Prints the current state of the board nicely formated.
