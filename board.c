@@ -72,37 +72,29 @@ int CheckFull(const Board* b){
 int CountScore(const Board* b, int id){
     int score = 0;
     int tempscore = 0;
-    int count = 0;
     
     //checking for sequential no's in a row
     for(int i = 0; i< b->rows; i++){
         for(int j = 0; j< b->columns; j++){
-            if(b->board[i][j] == id){
-                tempscore++;
+            if(b->board[i][j] == id && j <= b->columns - 2){
+                do{
+                    tempscore++;
+                    j++;
+                } while(b->board[i][j] == id && j < b->columns);
+                   
+                if(tempscore == 1){
+                    tempscore = 0;
+                }
             }
+            
+            score += tempscore;
+            tempscore = 0;
+
         }
         
-        if(tempscore > 2){
-            score += tempscore;
-        }
-
-        tempscore = 0;
     }
     
     
-    for(int i = 0; i< b->columns; i++){
-        for(int j = 0; j< b->rows; j++){
-            if(b->board[j][i] == id){
-                tempscore++;
-            }
-        }
-        
-        if(tempscore > 2){
-            score += tempscore;
-        }
-
-        tempscore = 0;
-    }
 
     //TODO implement other countings
 
