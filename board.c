@@ -88,6 +88,21 @@ int CountScore(const Board* b, int id){
 
         tempscore = 0;
     }
+    
+    
+    for(int i = 0; i< b->columns; i++){
+        for(int j = 0; j< b->rows; j++){
+            if(b->board[j][i] == id){
+                tempscore++;
+            }
+        }
+        
+        if(tempscore > 2){
+            score += tempscore;
+        }
+
+        tempscore = 0;
+    }
 
     //TODO implement other countings
 
