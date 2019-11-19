@@ -77,10 +77,13 @@ int CountScore(const Board* b, int id){
     for(int i = 0; i< b->rows; i++){
         for(int j = 0; j< b->columns; j++){
             if(b->board[i][j] == id && j <= b->columns - 2){
-                do{
+                tempscore = 1;
+                j++;
+
+                while(j < b->columns && b->board[i][j] == id){
                     tempscore++;
                     j++;
-                } while(b->board[i][j] == id && j < b->columns);
+                }
                    
                 if(tempscore == 1){
                     tempscore = 0;
@@ -95,7 +98,145 @@ int CountScore(const Board* b, int id){
     }
     
     
+    
+    //checking for vertical numbers in a row 
+    for(int j = 0; j< b->columns; j++){
+        for(int i = 0; i< b->rows; i++){
+            if(b->board[i][j] == id && i <= b->rows - 2){
+                tempscore = 1;
+                i++;
+                
+                while(i < b->rows && b->board[i][j] == id){
+                    tempscore++;
+                    i++;
+                } 
 
+                if(tempscore == 1){
+                    tempscore = 0;
+                }
+            }
+            
+            score += tempscore;
+            tempscore = 0;
+
+        }
+        
+    }
+    
+   //diagonaly from top-left to bottom-right 
+   
+    for(int i = 0; i < b->rows; i++){
+       //int tempi = i;
+       //int tempj = 0;
+        for(int tempi = i, tempj = 0; (tempi < b->rows) && (tempj < b->columns); tempi++, tempj++){
+
+            if(b->board[tempi][tempj] == id && tempi <= b->rows - 2 && tempj <= b->columns - 2){
+                tempscore = 1;
+                tempi++;
+                tempj++;
+                while(tempi < b->rows && tempj < b->columns && b->board[tempi][tempj] == id){
+                   tempscore++;
+                   tempi++;
+                   tempj++;
+                }
+
+                if(tempscore == 1){
+                    tempscore = 0;
+                }
+                //printf("%d\n", tempscore);
+                score += tempscore;
+                tempscore = 0;
+
+            }
+
+        }
+    }
+
+
+    for(int j = 1; j < b->columns; j++){
+
+         
+        for(int tempi = 0, tempj = j; tempi < b->rows && tempj < b->columns; tempi++, tempj++){
+            if(b->board[tempi][tempj] == id && tempi <= b->rows - 2 && tempj <= b->columns - 2){
+                tempscore = 1;
+                tempi++;
+                tempj++;
+                while(tempi < b->rows && tempj < b->columns && b->board[tempi][tempj] == id){
+                    tempscore++;
+                    tempi++;
+                    tempj++;
+                }
+
+                if(tempscore == 1){
+                    tempscore = 0;
+                }else{
+                    //tempscore--;
+                }
+                score += tempscore;
+                tempscore = 0;
+
+            }
+        }
+
+    }
+
+    //diagonaly from top right to bottom left
+    for(int i = 0; i < b->rows; i++){
+       //int tempi = i;
+       //int tempj = 0;
+        for(int tempi = i, tempj = b->columns - 1; (tempi < b->rows) && (tempj >= 0); tempi++, tempj--){
+
+            if(b->board[tempi][tempj] == id && tempi <= b->rows - 2 && tempj >= 1){
+                tempscore = 1;
+                tempi++;
+                tempj--;
+                while(tempi < b->rows && tempj >= 0 && b->board[tempi][tempj] == id){
+                   tempscore++;
+                   tempi++;
+                   tempj--;
+                }
+
+                if(tempscore == 1){
+                    tempscore = 0;
+                }
+                //printf("%d\n", tempscore);
+                score += tempscore;
+                tempscore = 0;
+
+            }
+
+        }
+    }
+
+
+    for(int j = 0; j < b->columns - 1; j++){
+
+         
+        for(int tempi = 0, tempj = j; tempi < b->rows && tempj > 0; tempi++, tempj--){
+            if(b->board[tempi][tempj] == id && tempi <= b->rows - 2 && tempj >= 1){
+                tempscore = 1;
+                tempi++;
+                tempj--;
+                while(tempi < b->rows && tempj >= 0 && b->board[tempi][tempj] == id){
+                    tempscore++;
+                    tempi++;
+                    tempj--;
+                }
+
+                if(tempscore == 1){
+                    tempscore = 0;
+                }else{
+                    //tempscore--;
+                }
+                score += tempscore;
+                tempscore = 0;
+
+            }
+        }
+
+    }
+    
+    
     //TODO implement other countings
 
 
