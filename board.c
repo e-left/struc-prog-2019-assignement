@@ -36,7 +36,7 @@ int CheckMove(const Board* b, int col){
         return 1;
     }
 
-    if(col > b->columns){
+    if(col >= b->columns){
         return 1;
     }
 

@@ -1,70 +1,59 @@
 #include<stdio.h>
 #include"board.h"
 #include<stdlib.h>
+#include"player.h"
+#include"player_random.h"
+
+extern int player_random(Board* b);
+extern int player(Board* b);
+
+int (*player1)(Board* b) = player;
+int (*player2)(Board* b) = player_random;
 
 int main(){
 
     Board* board;
     board = (Board*) malloc(sizeof(Board));
-    //printf("%d",InitBoard(board, 5, 6));
-    InitBoard(board, 10,10);
-    PrintBoard(board);
-    InsertInto(board, 1, 3);
-    InsertInto(board, 1, 2);
-    InsertInto(board, 0, 2);
-    InsertInto(board, 2, 2);
-    InsertInto(board, 2, 3);
-    InsertInto(board, 2, 2);
-    InsertInto(board, 0, 2);
-    InsertInto(board, 0, 2);
-    InsertInto(board, 0, 2);
-    InsertInto(board, 1, 3);
-    //InsertInto(board, 8, 2);
-    //InsertInto(board, 9, 2);
-    //InsertInto(board, 1, 3);
-    //InsertInto(board, 1, 2);
+    InitBoard(board, 10, 10);
+
+    printf("Hello and welcome to the advanced connect4 game!\n");
+    printf("You know the rules, you know the game, you (probably) have a working solution.\n");
+    printf("Let the game begin!\n");
     
-    InsertInto(board, 8, 3);
-    InsertInto(board, 8, 3);
-    InsertInto(board, 8, 3);
-    InsertInto(board, 8, 3);
-    InsertInto(board, 8, 3);
-    InsertInto(board, 8, 3);
-    InsertInto(board, 8, 3);
-    InsertInto(board, 8, 3);
-    InsertInto(board, 9, 3);
-    InsertInto(board, 9, 3);
-    InsertInto(board, 9, 3);
-    InsertInto(board, 9, 3);
-    InsertInto(board, 9, 3);
-    InsertInto(board, 9, 3);
-    InsertInto(board, 9, 3);
-    InsertInto(board, 9, 3);
-    InsertInto(board, 8, 6);
-    InsertInto(board, 8, 5);
-    InsertInto(board, 9, 5);
 
-    //InsertInto(board, 3, 2);
-    //InsertInto(board, 0, 2);
-    //InsertInto(board, 0, 2);
-    //InsertInto(board, 0, 2);
-    //InsertInto(board, 0, 2);
-    //InsertInto(board, 0, 2);
-    //InsertInto(board, 9, 2);
-    //InsertInto(board, 8, 2);
-    //InsertInto(board, 8, 2);
-    //InsertInto(board, 0, 2);
-    //InsertInto(board, 0, 2);
-    //InsertInto(board, 0, 2);
-    //InsertInto(board, 3, 2);
-    //InsertInto(board, 3, 2);
-    //InsertInto(board, 4, 2);
-    //InsertInto(board, 4, 2);
-    InsertInto(board, 9, 6);
+    while(!CheckFull(board)){
+        int move_a = player1(board);
+        int move_b = player2(board);
 
-    PrintBoard(board);
-    printf("%d\n", CountScore(board, 6));
+        if(CheckMove(board, move_a)){
+            printf("Player 1 Loses. Player 2 wins!(invalid move)\n");
+            PrintBoard(board);
+            break;
+        }
+        if(CheckMove(board, move_a)){
+            printf("Player 1 Loses. Player 2 wins!(invalid move)\n");
+            PrintBoard(board);
+            break;
+        }
 
+        InsertInto(board, move_a, 1);
+        PrintBoard(board);
+        InsertInto(board, move_b, 2);
+        PrintBoard(board);
+    }
 
+    int score_a = CountScore(board, 1);
+    int score_b = CountScore(board, 2);
+
+    printf("Player 1: %d , Player 2: %d\n", score_a, score_b);
+    if(score_a > score_b){
+        printf("Player 1 wins!\n");
+    }else if(score_a < score_b){
+        printf("Player 2 wins!\n");
+    }else{
+        printf("It's a tie!\n");
+    }
+
+    DestroyBoard(board);
     return 0;
 }

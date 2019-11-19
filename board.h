@@ -1,4 +1,6 @@
 //Board struct
+#ifndef _BOARD_
+#define _BOARD_
 typedef struct {
     int rows;
     int columns;
@@ -25,3 +27,5 @@ void PrintBoard(const Board* b);
 
 //Free the memory needed for the board
 void DestroyBoard(Board* b);
+
+#endif
