@@ -4,40 +4,43 @@
 #include"player.h"
 #include"player_random.h"
 
-extern int player_random(Board* b);
-extern int player(Board* b);
+extern int player_random(const Board* b);
+extern int player(const Board* b);
 
-int (*player1)(Board* b) = player;
-int (*player2)(Board* b) = player_random;
+//int (*player1)(const Board* b) = player;          
+int (*player2)(const Board* b) = random_player;
+int (*player1)(const Board* b) = random_player;
 
 int main(){
 
     Board* board;
     board = (Board*) malloc(sizeof(Board));
-    InitBoard(board, 10, 10);
+    int width, height;
+
 
     printf("Hello and welcome to the advanced connect4 game!\n");
     printf("You know the rules, you know the game, you (probably) have a working solution.\n");
+    printf("Input the dimensions(rows x columns): ");
+    scanf("%d %d", &height, &width);
     printf("Let the game begin!\n");
+    InitBoard(board, height, width);
     
-
     while(!CheckFull(board)){
         int move_a = player1(board);
-        int move_b = player2(board);
 
         if(CheckMove(board, move_a)){
             printf("Player 1 Loses. Player 2 wins!(invalid move)\n");
             PrintBoard(board);
             break;
         }
-        if(CheckMove(board, move_a)){
-            printf("Player 1 Loses. Player 2 wins!(invalid move)\n");
-            PrintBoard(board);
-            break;
-        }
-
         InsertInto(board, move_a, 1);
         PrintBoard(board);
+        int move_b = player2(board);
+        if(CheckMove(board, move_b)){
+            printf("Player 2 Loses. Player 1 wins!(invalid move)\n");
+            PrintBoard(board);
+            break;
+        }
         InsertInto(board, move_b, 2);
         PrintBoard(board);
     }

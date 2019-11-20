@@ -13,6 +13,6 @@ typedef struct {
 Board.board is a two dimensional array declared somewhat like this: Board.board[rows][columns]
 */
 
-extern int player(Board* b){
+extern int player(const Board* b){
     //Happy hacking :)
 }

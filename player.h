@@ -1,3 +1,3 @@
 #include"board.h"
 
-extern int player(Board* b);
+extern int player(const Board* b);

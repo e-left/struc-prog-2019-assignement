@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<time.h>
 
-extern int random_player(Board* b){
+extern int random_player(const Board* b){
     int moves[10];
     int counter = 0;
     for(int i = 0; i < b->columns; i++){
