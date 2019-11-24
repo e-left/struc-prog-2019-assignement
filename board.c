@@ -18,6 +18,11 @@ int InitBoard(Board* b, int r, int c){
         b->board[i] = (int*) malloc(c * sizeof(int));
     }
 
+    for(int i = 0 ; i < r ; i++){
+        for(int j = 0 ; j < c ; j++){
+            b->board[i][j] = 0;
+        }
+    }
 
     for(int i = 0; i < r; i++){
         if (b->board[i] == NULL){
