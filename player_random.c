@@ -1,6 +1,6 @@
-#include"board.h"
 #include<stdlib.h>
-#include<time.h>
+
+#include"board.h"
 
 extern int random_player(const Board* b){
     int moves[10];
@@ -10,9 +10,8 @@ extern int random_player(const Board* b){
             moves[counter++] = i;
         }
     }
-    srand(time(0));
+
     int move = rand() % (counter + 1);
 
-    
     return moves[move];
 }

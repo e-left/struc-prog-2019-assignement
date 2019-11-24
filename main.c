@@ -1,13 +1,16 @@
 #include<stdio.h>
-#include"board.h"
 #include<stdlib.h>
+#include<time.h>
+
+#include"board.h"
+
 #include"player.h"
 #include"player_random.h"
 
 extern int player_random(const Board* b);
 extern int player(const Board* b);
 
-//int (*player1)(const Board* b) = player;          
+//int (*player1)(const Board* b) = player;
 int (*player2)(const Board* b) = random_player;
 int (*player1)(const Board* b) = random_player;
 
@@ -24,7 +27,7 @@ int main(){
     scanf("%d %d", &height, &width);
     printf("Let the game begin!\n");
     InitBoard(board, height, width);
-    
+
     while(!CheckFull(board)){
         int move_a = player1(board);
 
