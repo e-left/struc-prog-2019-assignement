@@ -12,6 +12,5 @@ extern int random_player(const Board* b){
     }
 
     int move = rand() % (counter + 1);
-
     return moves[move];
 }
