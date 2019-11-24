@@ -44,6 +44,7 @@ int main(){
 
         printf("\n-------------- Move #%d --------------\n", moves++);
         int move_a = player1(board);
+        printf("Player 1 chooses %d\n", move_a);
 
         if(CheckMove(board, move_a)){
             printf("Player 1 Loses. Player 2 wins!(invalid move)\n");
@@ -53,6 +54,7 @@ int main(){
         InsertInto(board, move_a, 1);
         PrintBoard(board);
         int move_b = player2(board);
+        printf("Player 2 chooses %d\n", move_b);
         if(CheckMove(board, move_b)){
             printf("Player 2 Loses. Player 1 wins!(invalid move)\n");
             PrintBoard(board);
