@@ -15,7 +15,7 @@ int InitBoard(Board* b, int r, int c){
     }
 
     for(int i = 0; i < r; i++){
-        b->board[i] = (int*) malloc(c * sizeof(int));
+        b->board[i] = (int*) calloc(c,  sizeof(int));
     }
 
     for(int i = 0 ; i < r ; i++){

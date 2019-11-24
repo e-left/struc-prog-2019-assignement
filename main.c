@@ -34,6 +34,8 @@ int main(){
     scanf("%f", &delay);
     printf("Let the game begin!\n");
     InitBoard(board, height, width);
+    PrintBoard(board);
+
 
     while(!CheckFull(board)){
         if(delay < 0){
@@ -53,6 +55,9 @@ int main(){
         }
         InsertInto(board, move_a, 1);
         PrintBoard(board);
+        if(CheckFull(board)){
+            break;
+        }
         int move_b = player2(board);
         printf("Player 2 chooses %d\n", move_b);
         if(CheckMove(board, move_b)){
