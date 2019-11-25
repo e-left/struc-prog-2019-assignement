@@ -1,18 +1,20 @@
-#include"board.h"
 #include<stdlib.h>
-#include<time.h>
+
+#include"board.h"
 
 extern int random_player(const Board* b){
-    int moves[10];
+    //int moves[10];
+    int* moves = (int*)calloc(b->columns, sizeof(int));
     int counter = 0;
     for(int i = 0; i < b->columns; i++){
         if(b->board[0][i] == 0){
             moves[counter++] = i;
         }
     }
-    srand(time(0));
-    int move = rand() % (counter + 1);
 
+    int move = rand() % counter;
+    int ret_move =  moves[move];
+    free(moves);
+    return ret_move;
     
-    return moves[move];
 }

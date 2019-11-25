@@ -6,18 +6,23 @@
 int InitBoard(Board* b, int r, int c){
     b->rows = r;
     b->columns = c;
-    
-    b->board = (int**) malloc(r * sizeof(int*));   
+
+    b->board = (int**) malloc(r * sizeof(int*));
 
     if(b->board == NULL){
         printf("Error allocating memory for the board!");
         return -1;
     }
-    
+
     for(int i = 0; i < r; i++){
-        b->board[i] = (int*) malloc(c * sizeof(int));
+        b->board[i] = (int*) calloc(c,  sizeof(int));
     }
 
+    for(int i = 0 ; i < r ; i++){
+        for(int j = 0 ; j < c ; j++){
+            b->board[i][j] = 0;
+        }
+    }
 
     for(int i = 0; i < r; i++){
         if (b->board[i] == NULL){
@@ -47,7 +52,7 @@ int CheckMove(const Board* b, int col){
     return 0;
 }
 
-//Inserts id into the lowest possible space in column col.  
+//Inserts id into the lowest possible space in column col.
 void InsertInto(Board* b, int col, int id){
     for(int i = (b->rows)-1; i >= 0; i--){
         if(b->board[i][col] == 0){
@@ -69,10 +74,11 @@ int CheckFull(const Board* b){
 }
 
 //Counts the score for each player id.
-int CountScore(const Board* b, int id){
+int CountScore(const Board* b, int id, int* m){
     int score = 0;
     int tempscore = 0;
-    
+    int max = 0;
+
     //checking for sequential no's in a row
     for(int i = 0; i< b->rows; i++){
         for(int j = 0; j< b->columns; j++){
@@ -84,47 +90,53 @@ int CountScore(const Board* b, int id){
                     tempscore++;
                     j++;
                 }
-                   
+
                 if(tempscore == 1){
                     tempscore = 0;
                 }
             }
-            
+
             score += tempscore;
+            if(tempscore > max){
+                max = tempscore;
+            }
             tempscore = 0;
 
         }
-        
+
     }
-    
-    
-    
-    //checking for vertical numbers in a row 
+
+
+
+    //checking for vertical numbers in a row
     for(int j = 0; j< b->columns; j++){
         for(int i = 0; i< b->rows; i++){
             if(b->board[i][j] == id && i <= b->rows - 2){
                 tempscore = 1;
                 i++;
-                
+
                 while(i < b->rows && b->board[i][j] == id){
                     tempscore++;
                     i++;
-                } 
+                }
 
                 if(tempscore == 1){
                     tempscore = 0;
                 }
             }
-            
+
             score += tempscore;
+            if(tempscore > max){
+                max = tempscore;
+            }
             tempscore = 0;
 
         }
-        
+
     }
-    
-   //diagonaly from top-left to bottom-right 
-   
+
+   //diagonaly from top-left to bottom-right
+
     for(int i = 0; i < b->rows; i++){
        //int tempi = i;
        //int tempj = 0;
@@ -145,6 +157,9 @@ int CountScore(const Board* b, int id){
                 }
                 //printf("%d\n", tempscore);
                 score += tempscore;
+            if(tempscore > max){
+                max = tempscore;
+            }
                 tempscore = 0;
 
             }
@@ -155,7 +170,7 @@ int CountScore(const Board* b, int id){
 
     for(int j = 1; j < b->columns; j++){
 
-         
+
         for(int tempi = 0, tempj = j; tempi < b->rows && tempj < b->columns; tempi++, tempj++){
             if(b->board[tempi][tempj] == id && tempi <= b->rows - 2 && tempj <= b->columns - 2){
                 tempscore = 1;
@@ -173,6 +188,9 @@ int CountScore(const Board* b, int id){
                     //tempscore--;
                 }
                 score += tempscore;
+            if(tempscore > max){
+                max = tempscore;
+            }
                 tempscore = 0;
 
             }
@@ -201,6 +219,9 @@ int CountScore(const Board* b, int id){
                 }
                 //printf("%d\n", tempscore);
                 score += tempscore;
+            if(tempscore > max){
+                max = tempscore;
+            }
                 tempscore = 0;
 
             }
@@ -211,7 +232,7 @@ int CountScore(const Board* b, int id){
 
     for(int j = 0; j < b->columns - 1; j++){
 
-         
+
         for(int tempi = 0, tempj = j; tempi < b->rows && tempj > 0; tempi++, tempj--){
             if(b->board[tempi][tempj] == id && tempi <= b->rows - 2 && tempj >= 1){
                 tempscore = 1;
@@ -229,16 +250,19 @@ int CountScore(const Board* b, int id){
                     //tempscore--;
                 }
                 score += tempscore;
+            if(tempscore > max){
+                max = tempscore;
+            }
                 tempscore = 0;
 
             }
         }
 
     }
-    
-    
-    //TODO implement other countings
 
+
+
+    *m = max; 
 
     return score;
 }
@@ -246,19 +270,22 @@ int CountScore(const Board* b, int id){
 //Prints the current state of the board nicely formated.
 //Assuming that no more than 9 players are playing the game
 void PrintBoard(const Board* b){
+    putchar('\n');
     for(int i = 0; i< 2*(b->columns) + 1; i++){
         if(i % 2 == 0){
             printf("+");
         }else{
-            printf("-");
+            printf("---");
         }
     }
     printf("\n");
 
-
     for(int i = 0; i< b->rows; i++){
         for(int j = 0; j< b->columns; j++){
-            printf("|%d", b->board[i][j]);
+            if(b->board[i][j] == 0)
+                printf("|   ");
+            else
+                printf("| %d ", b->board[i][j]);
         }
         printf("|\n");
 
@@ -266,10 +293,10 @@ void PrintBoard(const Board* b){
             if(i % 2 == 0){
                 printf("+");
             }else{
-                printf("-");
+                printf("---");
             }
         }
-    
+
         printf("\n");
 
     }

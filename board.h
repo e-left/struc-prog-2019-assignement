@@ -20,7 +20,7 @@ void InsertInto(Board* b, int col, int id);
 int CheckFull(const Board* b);
 
 //Counts the score for each player id.
-int CountScore(const Board* b, int id);
+int CountScore(const Board* b, int id, int* m);
 
 //Prints the current state of the board nicely formated.
 void PrintBoard(const Board* b);
