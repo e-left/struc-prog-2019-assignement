@@ -74,9 +74,10 @@ int CheckFull(const Board* b){
 }
 
 //Counts the score for each player id.
-int CountScore(const Board* b, int id){
+int CountScore(const Board* b, int id, int* m){
     int score = 0;
     int tempscore = 0;
+    int max = 0;
 
     //checking for sequential no's in a row
     for(int i = 0; i< b->rows; i++){
@@ -96,6 +97,9 @@ int CountScore(const Board* b, int id){
             }
 
             score += tempscore;
+            if(tempscore > max){
+                max = tempscore;
+            }
             tempscore = 0;
 
         }
@@ -122,6 +126,9 @@ int CountScore(const Board* b, int id){
             }
 
             score += tempscore;
+            if(tempscore > max){
+                max = tempscore;
+            }
             tempscore = 0;
 
         }
@@ -150,6 +157,9 @@ int CountScore(const Board* b, int id){
                 }
                 //printf("%d\n", tempscore);
                 score += tempscore;
+            if(tempscore > max){
+                max = tempscore;
+            }
                 tempscore = 0;
 
             }
@@ -178,6 +188,9 @@ int CountScore(const Board* b, int id){
                     //tempscore--;
                 }
                 score += tempscore;
+            if(tempscore > max){
+                max = tempscore;
+            }
                 tempscore = 0;
 
             }
@@ -206,6 +219,9 @@ int CountScore(const Board* b, int id){
                 }
                 //printf("%d\n", tempscore);
                 score += tempscore;
+            if(tempscore > max){
+                max = tempscore;
+            }
                 tempscore = 0;
 
             }
@@ -234,6 +250,9 @@ int CountScore(const Board* b, int id){
                     //tempscore--;
                 }
                 score += tempscore;
+            if(tempscore > max){
+                max = tempscore;
+            }
                 tempscore = 0;
 
             }
@@ -242,8 +261,8 @@ int CountScore(const Board* b, int id){
     }
 
 
-    //TODO implement other countings
 
+    *m = max; 
 
     return score;
 }

@@ -68,17 +68,31 @@ int main(){
         InsertInto(board, move_b, 2);
         PrintBoard(board);
     }
+    int max_a;
+    int max_b;
 
-    int score_a = CountScore(board, 1);
-    int score_b = CountScore(board, 2);
+    int score_a = CountScore(board, 1, &max_a);
+    int score_b = CountScore(board, 2, &max_b);
 
-    printf("Player 1: %d , Player 2: %d\n", score_a, score_b);
-    if(score_a > score_b){
+    printf("Player 1: %d , Player 2: %d\n", max_a, max_b);
+    if(max_a > max_b){
         printf("Player 1 wins!\n");
-    }else if(score_a < score_b){
+    }else if(max_a < max_b){
         printf("Player 2 wins!\n");
     }else{
-        printf("It's a tie!\n");
+
+        printf("Total score --- Player 1: %d, Player 2: %d\n", score_a, score_b);
+        if(score_a > score_b){
+            printf("Player 1 wins!\n");
+        }
+        else if(score_a < score_b){
+            printf("Player 2 wins!\n");
+            
+        }else{
+
+            printf("It's a tie!\n");
+
+        }
     }
 
     DestroyBoard(board);

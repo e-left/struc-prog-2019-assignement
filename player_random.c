@@ -13,5 +13,8 @@ extern int random_player(const Board* b){
     }
 
     int move = rand() % counter;
-    return moves[move];
+    int ret_move =  moves[move];
+    free(moves);
+    return ret_move;
+    
 }
