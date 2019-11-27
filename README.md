@@ -1,5 +1,8 @@
 # Assignement for the Structured Programming class, 2019
 ---
+
+Οδηγίες στα ελληνικά: https://docs.google.com/document/d/1WDIKrCR7x0IxsswJQzSBKGUxaqBpOKuZb2LDw-YQYEU/edit?usp=sharing
+
 This is an implementation of the classic Score 4 game, with a small twist. The game ends when the board is filled or when one of the players inputs an invalid move, in which case they immediately lose. When the board is filled, each player's score is the maximum number of "chips" he has on any direction(horizontally, vertically or diagonally). If the players have the same score then the overall number of their "chips" sequentially is counted and then the player with the
 highhighest score wins. 
 
