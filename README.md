@@ -3,6 +3,14 @@
 This is an implementation of the classic Score 4 game, with a small twist. The game ends when the board is filled or when one of the players inputs an invalid move, in which case they immediately lose. When the board is filled, each player's score is the maximum number of "chips" he has on any direction(horizontally, vertically or diagonally). If the players have the same score then the overall number of their "chips" sequentially is counted and then the player with the
 highhighest score wins. 
 
+An example of scoring in a 4x4 board is:
+
+![Example of 4x4 scoring](https://github.com/e-left/struc-prog-2019-assignement/blob/master/images/scoring_4x4.PNG)
+
+Another example of scoring in a 10x10 board is:
+
+![Example of 10x10 scoring](https://github.com/e-left/struc-prog-2019-assignement/blob/master/images/scoring_10x10.PNG)
+
 Current implementation allows two players to play but it can be easily adapted to allow three or more players(maximum 9) to play together, by modifying the `main.c` file.
 
 # Structure
