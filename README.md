@@ -4,7 +4,7 @@
 Οδηγίες στα ελληνικά: https://docs.google.com/document/d/1WDIKrCR7x0IxsswJQzSBKGUxaqBpOKuZb2LDw-YQYEU/edit?usp=sharing
 
 This is an implementation of the classic Score 4 game, with a small twist. The game ends when the board is filled or when one of the players inputs an invalid move, in which case they immediately lose. When the board is filled, each player's score is the maximum number of "chips" he has on any direction(horizontally, vertically or diagonally). If the players have the same score then the overall number of their "chips" sequentially is counted and then the player with the
-highhighest score wins. 
+highighest score wins. 
 
 An example of scoring in a 4x4 board is:
 
@@ -41,8 +41,6 @@ After you have created your logic you go to the file `main.c` and you perform th
 1. Replace the header file `player_random.h` with the one you created.
 2. Replace the function `player_random` in line 15 or 16 with your function name that you implemented in your file.
 
-Apart from that you have to write a 5 page report, explaining and presenting your algorithm.
-
 # How to win
 ---
 Your objective is to implement your function in your file correctly to create a "smart" player that will be able to win the random player effectively. As a stepup in the end of the semester two players will be pitted agains each other to see which one works the best. Alas, your objective is to create a strategy to beat this game.
@@ -65,8 +63,12 @@ If it compiles without errors(if your code is correct), on startup the game will
     - 0, to have no delay in between rounds.
     - -1, to be able to step over each move when you press `Enter`
 
-# Grading
+# Teams & Grading
 ---
+
+- Each team must have **2 students at most** (this means it can comprise 1 student)!
+- You have to submit the `player_xxx.c` file at the end of the semester
+- Apart from that you have to write a 5 page report, explaining and presenting your algorithm.
 - You can get a maximum of +2 each for a perfect implementation of a player. Meaning that you have to create a good working algorithm and have a good report and presentation when you hand your assignement.
 - In the end of the semester a knockout type contest will be held:
     - First team gets +1 extra grade
